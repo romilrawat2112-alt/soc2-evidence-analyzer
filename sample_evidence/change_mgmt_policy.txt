@@ -1,0 +1,107 @@
+CHANGE MANAGEMENT POLICY
+========================
+Document ID: POL-CM-001
+Version: 3.2
+Effective Date: January 1, 2025
+Last Reviewed: March 15, 2025
+Owner: VP of Engineering
+
+1. PURPOSE
+----------
+This policy establishes the requirements for managing changes to production
+systems, applications, and infrastructure to minimize risk and ensure
+system stability while enabling continuous delivery.
+
+2. SCOPE
+--------
+This policy applies to all changes to:
+- Production application code and configurations
+- Infrastructure components (servers, networks, databases)
+- Third-party integrations and APIs
+- Security configurations and access controls
+- Database schemas and data migrations
+
+3. CHANGE CATEGORIES
+--------------------
+
+3.1 Standard Changes
+- Pre-approved, low-risk, routine changes
+- Examples: dependency updates, minor UI tweaks, log level changes
+- Require: peer code review, automated tests passing, CI/CD pipeline approval
+- Approval: Automated via CI/CD pipeline
+
+3.2 Normal Changes
+- Moderate risk changes requiring review
+- Examples: new features, API changes, infrastructure modifications
+- Require: code review by 2 engineers, QA sign-off, staging deployment test
+- Approval: Engineering Manager + Change Advisory Board (CAB) weekly review
+
+3.3 Emergency Changes
+- Critical fixes for production incidents (P1/P2 severity)
+- Examples: security patches, data loss prevention, service outages
+- Require: verbal approval from on-call Engineering Manager
+- Post-implementation: retrospective review within 48 hours, CAB ratification
+- All emergency changes must be documented in the incident management system
+
+4. CHANGE REQUEST PROCESS
+-------------------------
+
+4.1 Submission
+- All changes submitted via Jira change request tickets
+- Required fields: description, risk assessment, rollback plan, testing evidence
+- Change requestor cannot approve their own change
+
+4.2 Review and Approval
+- Code review via GitHub pull requests (minimum 2 approvers)
+- Automated checks: unit tests, integration tests, security scanning (Snyk)
+- Manual QA for Normal and Emergency changes
+- CAB reviews Normal changes weekly (Tuesdays 2:00 PM ET)
+
+4.3 Implementation
+- Deployments via CI/CD pipeline (GitHub Actions)
+- Blue-green deployment strategy for zero-downtime releases
+- Feature flags used for gradual rollouts (LaunchDarkly)
+- Deployment window: Monday-Thursday, 9:00 AM - 3:00 PM ET
+  (except Emergency changes)
+
+4.4 Post-Implementation Review
+- Automated monitoring alerts active for 30 minutes post-deploy
+- Deployment verified via health check endpoints
+- Rollback triggered automatically if error rate exceeds 1% threshold
+- Change ticket closed with deployment evidence
+
+5. ROLLBACK PROCEDURES
+----------------------
+- All changes must have a documented rollback plan before approval
+- Automated rollback via CI/CD pipeline revert
+- Database migrations must include down-migration scripts
+- Rollback decision authority: on-call engineer or Engineering Manager
+- Maximum rollback time target: 15 minutes
+
+6. TESTING REQUIREMENTS
+-----------------------
+- Unit test coverage minimum: 80%
+- Integration tests required for API changes
+- Performance testing required for changes affecting >1000 requests/minute
+- Security review required for authentication/authorization changes
+- Staging environment deployment required for Normal changes
+
+7. DOCUMENTATION AND AUDIT TRAIL
+---------------------------------
+- All changes tracked in Jira with full audit trail
+- Git commit history maintained with descriptive commit messages
+- Deployment logs retained for 12 months
+- CAB meeting minutes documented and stored in Confluence
+- Monthly change metrics reported to leadership
+
+8. COMPLIANCE AND ENFORCEMENT
+------------------------------
+- Policy violations reported to Engineering Management
+- Repeated violations escalated to VP of Engineering
+- Annual policy review and update cycle
+- Policy awareness training required for all engineering staff annually
+
+APPROVAL:
+- VP of Engineering: Approved (January 1, 2025)
+- CISO: Approved (January 1, 2025)
+- CTO: Approved (January 1, 2025)

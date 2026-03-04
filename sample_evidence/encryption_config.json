@@ -1,0 +1,110 @@
+{
+  "KMSConfiguration": {
+    "Region": "us-east-1",
+    "ExportDate": "2025-06-01T10:00:00Z",
+    "Keys": [
+      {
+        "KeyId": "arn:aws:kms:us-east-1:123456789012:key/a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "Alias": "alias/prod-data-encryption",
+        "Description": "Primary encryption key for production data at rest",
+        "KeyState": "Enabled",
+        "KeyUsage": "ENCRYPT_DECRYPT",
+        "KeySpec": "SYMMETRIC_DEFAULT",
+        "Origin": "AWS_KMS",
+        "CreationDate": "2023-06-15T00:00:00Z",
+        "KeyRotationEnabled": true,
+        "RotationPeriodDays": 365,
+        "LastRotatedDate": "2025-01-15T00:00:00Z",
+        "KeyPolicy": {
+          "AdminAccess": ["arn:aws:iam::123456789012:role/KMSAdministrators"],
+          "EncryptDecrypt": [
+            "arn:aws:iam::123456789012:role/ApplicationServers",
+            "arn:aws:iam::123456789012:role/DataPipeline"
+          ],
+          "GrantPermissions": ["arn:aws:iam::123456789012:role/KMSAdministrators"]
+        }
+      },
+      {
+        "KeyId": "arn:aws:kms:us-east-1:123456789012:key/b2c3d4e5-f6a7-8901-bcde-f12345678901",
+        "Alias": "alias/prod-secrets-encryption",
+        "Description": "Encryption key for AWS Secrets Manager",
+        "KeyState": "Enabled",
+        "KeyUsage": "ENCRYPT_DECRYPT",
+        "KeySpec": "SYMMETRIC_DEFAULT",
+        "Origin": "AWS_KMS",
+        "CreationDate": "2023-06-15T00:00:00Z",
+        "KeyRotationEnabled": true,
+        "RotationPeriodDays": 90,
+        "LastRotatedDate": "2025-04-01T00:00:00Z"
+      }
+    ]
+  },
+  "EncryptedResources": {
+    "S3Buckets": [
+      {
+        "BucketName": "prod-data-lake",
+        "Encryption": "aws:kms",
+        "KMSKeyAlias": "alias/prod-data-encryption",
+        "BucketPolicy": "EnforceTLS"
+      },
+      {
+        "BucketName": "prod-application-logs",
+        "Encryption": "AES256",
+        "KMSKeyAlias": null,
+        "BucketPolicy": "EnforceTLS"
+      },
+      {
+        "BucketName": "prod-backups",
+        "Encryption": "aws:kms",
+        "KMSKeyAlias": "alias/prod-data-encryption",
+        "BucketPolicy": "EnforceTLS"
+      }
+    ],
+    "RDSInstances": [
+      {
+        "DBInstanceId": "prod-primary-db",
+        "Engine": "postgres",
+        "StorageEncrypted": true,
+        "KMSKeyAlias": "alias/prod-data-encryption",
+        "SSLEnforced": true,
+        "CertificateAuthority": "rds-ca-rsa2048-g1"
+      },
+      {
+        "DBInstanceId": "prod-analytics-db",
+        "Engine": "postgres",
+        "StorageEncrypted": true,
+        "KMSKeyAlias": "alias/prod-data-encryption",
+        "SSLEnforced": true,
+        "CertificateAuthority": "rds-ca-rsa2048-g1"
+      }
+    ],
+    "EBSVolumes": {
+      "TotalVolumes": 45,
+      "EncryptedVolumes": 45,
+      "UnencryptedVolumes": 0,
+      "DefaultEncryption": "Enabled",
+      "DefaultKMSKey": "alias/prod-data-encryption"
+    }
+  },
+  "TransitEncryption": {
+    "ALBConfiguration": {
+      "SSLPolicy": "ELBSecurityPolicy-TLS13-1-2-2021-06",
+      "MinimumTLSVersion": "TLSv1.2",
+      "HTTPSRedirect": true,
+      "HSTSEnabled": true,
+      "HSTSMaxAge": 31536000
+    },
+    "CertificateManagement": {
+      "Provider": "AWS Certificate Manager",
+      "AutoRenewal": true,
+      "Certificates": [
+        {
+          "DomainName": "*.example.com",
+          "Status": "ISSUED",
+          "NotAfter": "2026-01-15T00:00:00Z",
+          "KeyAlgorithm": "RSA-2048"
+        }
+      ]
+    }
+  }
+}

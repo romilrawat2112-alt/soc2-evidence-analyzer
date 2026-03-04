@@ -1,0 +1,26 @@
+controls:
+  - id: "CC8.1"
+    category: "Change Management"
+    title: "Change Management Process"
+    description: >
+      The entity authorizes, designs, develops, configures, documents, tests,
+      approves, and implements changes to infrastructure, data, software, and
+      procedures to meet its objectives. This includes formal change approval
+      workflows, pre-deployment testing, rollback planning, and procedures for
+      handling emergency changes.
+    points_of_focus:
+      - "A formal change management policy defines the process for requesting, reviewing, approving, and implementing changes to production systems."
+      - "Changes are tested in a non-production environment before deployment to production to identify and mitigate risks."
+      - "Change approvals are documented and require sign-off from appropriate stakeholders such as change advisory boards or system owners."
+      - "Rollback procedures are defined and documented for each change to enable rapid recovery if a deployment introduces issues."
+      - "Emergency change procedures allow expedited deployment when necessary while still requiring post-implementation review and documentation."
+    evidence_expectations:
+      - "Change management policy documentation describing the change lifecycle, roles, approval requirements, and testing procedures."
+      - "Change request records or tickets showing documented approvals, testing results, and implementation details."
+      - "Evidence of pre-production testing such as test plans, test results, or staging environment deployment logs."
+      - "Emergency change records demonstrating adherence to expedited procedures with post-implementation review."
+    scoring_guidance:
+      fully_met: "Evidence demonstrates a mature change management process with a documented policy, formal change requests with approvals, pre-production testing, rollback plans, and emergency change procedures with post-implementation reviews."
+      partially_met: "A change management process exists but is not consistently followed, some changes bypass approval, testing is not always performed before deployment, or rollback plans are not documented."
+      not_met: "No formal change management process exists, changes are deployed directly to production without approval or testing, and no rollback procedures are in place."
+      not_applicable: "The entity does not make changes to production systems, or all changes are managed entirely by a third-party provider under a contractual arrangement."

@@ -1,0 +1,35 @@
+# Environment
+.env
+.venv/
+env/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Reports output
+*.html
+!src/soc2_analyzer/reports/templates/*.j2
+audit_report*.json
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/

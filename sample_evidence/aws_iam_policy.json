@@ -1,0 +1,78 @@
+{
+  "PolicyName": "ProductionAccessPolicy",
+  "Description": "IAM policy governing access to production AWS resources",
+  "CreateDate": "2024-01-15T09:30:00Z",
+  "LastUpdated": "2025-06-01T14:22:00Z",
+  "PasswordPolicy": {
+    "MinimumPasswordLength": 14,
+    "RequireSymbols": true,
+    "RequireNumbers": true,
+    "RequireUppercaseCharacters": true,
+    "RequireLowercaseCharacters": true,
+    "MaxPasswordAge": 90,
+    "PasswordReusePrevention": 12,
+    "HardExpiry": false
+  },
+  "MFAConfiguration": {
+    "MFARequired": true,
+    "AllowedMFATypes": ["virtual", "hardware"],
+    "EnforcedForConsole": true,
+    "EnforcedForCLI": true,
+    "GracePeriodDays": 0
+  },
+  "Policies": [
+    {
+      "PolicyName": "S3ReadOnlyAccess",
+      "Effect": "Allow",
+      "Actions": ["s3:GetObject", "s3:ListBucket"],
+      "Resources": ["arn:aws:s3:::prod-data-*", "arn:aws:s3:::prod-data-*/*"],
+      "AttachedTo": ["role/DataAnalysts"]
+    },
+    {
+      "PolicyName": "EC2ManagementAccess",
+      "Effect": "Allow",
+      "Actions": ["ec2:DescribeInstances", "ec2:StartInstances", "ec2:StopInstances"],
+      "Resources": ["arn:aws:ec2:us-east-1:123456789012:instance/*"],
+      "Condition": {"StringEquals": {"aws:RequestedRegion": "us-east-1"}},
+      "AttachedTo": ["role/DevOpsEngineers"]
+    },
+    {
+      "PolicyName": "AdminFullAccess",
+      "Effect": "Allow",
+      "Actions": ["*"],
+      "Resources": ["*"],
+      "AttachedTo": ["role/CloudAdministrators"],
+      "Notes": "FINDING: Overly broad wildcard permissions - should be scoped to specific services"
+    },
+    {
+      "PolicyName": "DenyDeleteProtection",
+      "Effect": "Deny",
+      "Actions": ["s3:DeleteBucket", "rds:DeleteDBInstance", "ec2:TerminateInstances"],
+      "Resources": ["*"],
+      "Condition": {"StringNotEquals": {"aws:PrincipalTag/Department": "CloudOps"}},
+      "AttachedTo": ["group/AllUsers"]
+    },
+    {
+      "PolicyName": "LambdaDeployment",
+      "Effect": "Allow",
+      "Actions": ["lambda:*"],
+      "Resources": ["arn:aws:lambda:us-east-1:123456789012:function:*"],
+      "AttachedTo": ["role/Developers"],
+      "Notes": "FINDING: lambda:* is overly permissive - should restrict to specific actions"
+    }
+  ],
+  "RoleAssignments": [
+    {"Role": "CloudAdministrators", "Members": 3, "LastReviewed": "2025-03-15"},
+    {"Role": "DevOpsEngineers", "Members": 8, "LastReviewed": "2025-03-15"},
+    {"Role": "DataAnalysts", "Members": 12, "LastReviewed": "2025-03-15"},
+    {"Role": "Developers", "Members": 25, "LastReviewed": "2025-03-15"},
+    {"Role": "ReadOnlyAuditors", "Members": 4, "LastReviewed": "2025-03-15"}
+  ],
+  "ServiceControlPolicies": {
+    "DenyRegionOutsideUS": {
+      "Effect": "Deny",
+      "Actions": ["*"],
+      "Condition": {"StringNotEquals": {"aws:RequestedRegion": ["us-east-1", "us-west-2"]}}
+    }
+  }
+}

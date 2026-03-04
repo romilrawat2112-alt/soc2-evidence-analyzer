@@ -1,0 +1,193 @@
+controls:
+  - id: "CC6.1"
+    category: "Logical and Physical Access Controls"
+    title: "Logical Access Security"
+    description: >
+      The entity implements logical access security software, infrastructure, and
+      architectures over protected information assets to protect them from security
+      events. This includes implementing access control software on systems and
+      applications, segmenting networks to limit unauthorized access, and encrypting
+      data at rest to prevent unauthorized disclosure.
+    points_of_focus:
+      - "Access control software is deployed to authenticate and authorize users before granting access to systems, applications, and data."
+      - "Network segmentation isolates sensitive systems and restricts lateral movement between network zones."
+      - "Encryption of data at rest is applied to databases, file systems, and storage volumes containing sensitive information."
+      - "Multi-factor authentication is required for access to critical systems and privileged accounts."
+    evidence_expectations:
+      - "Access control configuration documentation or screenshots showing authentication and authorization mechanisms."
+      - "Network architecture diagrams demonstrating segmentation boundaries, VLANs, and firewall rules between zones."
+      - "Encryption configuration evidence showing algorithms, key lengths, and scope of data-at-rest encryption."
+      - "MFA enrollment reports or configuration evidence for privileged and remote access."
+    scoring_guidance:
+      fully_met: "Evidence demonstrates comprehensive logical access controls including access control software, network segmentation, data-at-rest encryption, and MFA for critical systems, all actively enforced and documented."
+      partially_met: "Some logical access controls are in place but gaps exist, such as missing MFA on certain systems, incomplete network segmentation, or encryption not applied to all sensitive data stores."
+      not_met: "No evidence of logical access controls, or controls are fundamentally inadequate with no access control software, no network segmentation, and no encryption of sensitive data."
+      not_applicable: "The system or environment does not process, store, or transmit data requiring logical access security controls."
+
+  - id: "CC6.2"
+    category: "Logical and Physical Access Controls"
+    title: "User Registration and Authorization"
+    description: >
+      Prior to issuing system credentials and granting system access, the entity
+      registers and authorizes new internal and external users whose access is
+      administered by the entity. User system credentials are removed when access
+      is no longer authorized. This includes formal provisioning workflows and
+      role-based access assignment.
+    points_of_focus:
+      - "A formal user registration and provisioning process exists for granting access to systems and applications."
+      - "Access requests require documented approval from appropriate management or data owners before provisioning."
+      - "Role-based access control is used to assign permissions aligned with job responsibilities."
+      - "Unique user identifiers are assigned to each individual to ensure accountability and traceability."
+    evidence_expectations:
+      - "Access request forms, tickets, or workflow records showing approval chains for new user provisioning."
+      - "User provisioning policy or procedure documentation describing the registration and authorization process."
+      - "Evidence of role-based access assignments such as role matrices or group membership reports."
+    scoring_guidance:
+      fully_met: "Evidence demonstrates a formal, documented user registration and authorization process with management approvals, unique user IDs, and role-based access assignment consistently applied."
+      partially_met: "A user provisioning process exists but is informal or inconsistently applied, approvals are not always documented, or role assignments are not clearly defined."
+      not_met: "No formal user registration or authorization process exists. Users are provisioned without documented approval or oversight."
+      not_applicable: "The system has no user accounts or all access is handled entirely by a third-party identity provider outside the entity's scope."
+
+  - id: "CC6.3"
+    category: "Logical and Physical Access Controls"
+    title: "Role-Based Access and Least Privilege"
+    description: >
+      The entity authorizes, modifies, or removes access to data, software,
+      functions, and other protected information assets based on roles,
+      responsibilities, or the system design and changes, giving consideration
+      to the concepts of least privilege and segregation of duties.
+    points_of_focus:
+      - "Access permissions are assigned based on defined roles aligned to job functions, following the principle of least privilege."
+      - "Segregation of duties is enforced to prevent any single individual from controlling all aspects of a critical process."
+      - "Periodic access reviews are conducted to validate that user permissions remain appropriate for current roles."
+      - "Privileged access is restricted to a limited set of administrators and subject to enhanced monitoring."
+      - "Access modifications are processed promptly when users change roles or responsibilities."
+    evidence_expectations:
+      - "Role-based access control matrix or policy documenting roles, associated permissions, and the principle of least privilege."
+      - "Evidence of periodic user access reviews such as review reports, sign-offs, or remediation records."
+      - "Segregation of duties matrix or conflict analysis for critical business processes."
+      - "Privileged account inventory and evidence of enhanced controls such as just-in-time access or session recording."
+    scoring_guidance:
+      fully_met: "Evidence demonstrates well-defined RBAC with least privilege enforcement, documented segregation of duties, regular access reviews with remediation, and controlled privileged access."
+      partially_met: "RBAC is partially implemented but least privilege is not consistently enforced, access reviews are infrequent or lack remediation follow-through, or segregation of duties gaps exist."
+      not_met: "No role-based access model exists, users have excessive permissions, no access reviews are performed, and segregation of duties is not considered."
+      not_applicable: "The system has a single-user or single-role design where RBAC and segregation of duties are not architecturally relevant."
+
+  - id: "CC6.4"
+    category: "Logical and Physical Access Controls"
+    title: "Physical Access Restrictions"
+    description: >
+      The entity restricts physical access to facilities and protected information
+      assets to authorized personnel to meet the entity's objectives. This includes
+      data center access controls, visitor management, and environmental monitoring
+      of physical spaces.
+    points_of_focus:
+      - "Physical access to data centers and server rooms is restricted using badge readers, biometric controls, or other physical access mechanisms."
+      - "Visitor access is managed through sign-in procedures, escort requirements, and visitor logs."
+      - "Physical access rights are reviewed periodically and revoked promptly when no longer needed."
+      - "Surveillance systems such as CCTV cameras monitor critical facility entry points and sensitive areas."
+    evidence_expectations:
+      - "Physical access control system reports or badge reader logs showing access to data centers and secure areas."
+      - "Visitor logs or sign-in records demonstrating visitor management procedures and escort compliance."
+      - "Physical access review documentation showing periodic validation of access rights."
+    scoring_guidance:
+      fully_met: "Evidence demonstrates robust physical access controls including badge or biometric access to secure areas, visitor management with logs and escorts, surveillance monitoring, and periodic access reviews."
+      partially_met: "Physical access controls exist but have gaps such as missing visitor logs, infrequent access reviews, or incomplete surveillance coverage."
+      not_met: "No physical access restrictions are in place, or facilities lack basic controls such as locked doors, badge access, or visitor management."
+      not_applicable: "The entity operates entirely in a cloud environment with no physical facilities under its control, and physical security is managed by the cloud service provider."
+
+  - id: "CC6.5"
+    category: "Logical and Physical Access Controls"
+    title: "Logical Access Removal"
+    description: >
+      The entity discontinues logical and physical access to protected information
+      assets when that access is no longer authorized. This includes timely
+      deprovisioning upon termination, role changes, and contractor offboarding.
+    points_of_focus:
+      - "A formal deprovisioning process ensures that access is revoked promptly upon employee termination or contract end."
+      - "Access removal is coordinated between HR, IT, and management to ensure timely execution."
+      - "Periodic reviews identify and disable orphaned or dormant accounts that are no longer associated with active users."
+      - "Deprovisioning timelines are defined, such as same-day removal for terminations and within a defined period for role changes."
+    evidence_expectations:
+      - "Deprovisioning procedure documentation describing the process and timelines for access removal."
+      - "Termination checklists or HR-IT coordination records showing access was revoked upon departure."
+      - "Dormant account reports and evidence of account disablement or deletion."
+      - "Audit logs or tickets confirming access removal actions and their timeliness."
+    scoring_guidance:
+      fully_met: "Evidence demonstrates a formal, timely deprovisioning process with documented procedures, HR-IT coordination, same-day or next-day access removal for terminations, and periodic dormant account reviews."
+      partially_met: "A deprovisioning process exists but is not consistently timely, some terminated accounts remain active longer than policy allows, or dormant account reviews are infrequent."
+      not_met: "No formal deprovisioning process exists, terminated users retain access for extended periods, and no reviews of dormant accounts are performed."
+      not_applicable: "The system has no individually provisioned user accounts requiring deprovisioning."
+
+  - id: "CC6.6"
+    category: "Logical and Physical Access Controls"
+    title: "System Boundaries Protection"
+    description: >
+      The entity implements logical access security measures to protect against
+      threats from sources outside its system boundaries. This includes deployment
+      of firewalls, intrusion detection and prevention systems, DMZ architectures,
+      and continuous network monitoring.
+    points_of_focus:
+      - "Firewalls are configured at network boundaries to restrict inbound and outbound traffic based on defined rule sets."
+      - "A DMZ architecture segregates externally facing systems from the internal network."
+      - "Intrusion detection and prevention systems monitor network traffic for malicious activity."
+      - "Network monitoring tools provide visibility into traffic patterns and alert on anomalous behavior."
+      - "Firewall rule sets are reviewed periodically to ensure they remain appropriate and do not contain overly permissive rules."
+    evidence_expectations:
+      - "Firewall configuration exports or rule set documentation showing boundary protection rules."
+      - "Network architecture diagrams depicting DMZ placement and boundary segmentation."
+      - "IDS/IPS configuration and alert reports demonstrating active monitoring of network boundaries."
+      - "Firewall rule review records showing periodic assessment and cleanup of access rules."
+    scoring_guidance:
+      fully_met: "Evidence demonstrates comprehensive boundary protection with properly configured firewalls, DMZ architecture, active IDS/IPS monitoring, and periodic firewall rule reviews."
+      partially_met: "Boundary protection exists but is incomplete, such as firewalls without regular rule reviews, no IDS/IPS, or an incomplete DMZ architecture."
+      not_met: "No boundary protection controls are in place, or firewalls are misconfigured with overly permissive rules and no monitoring of network boundaries."
+      not_applicable: "The entity does not manage its own network boundaries, such as when using a fully managed serverless or PaaS environment."
+
+  - id: "CC6.7"
+    category: "Logical and Physical Access Controls"
+    title: "Data Transmission Protection"
+    description: >
+      The entity restricts the transmission, movement, and removal of information
+      to authorized internal and external users and processes, and protects it
+      during transmission against unauthorized access. This includes encryption
+      of data in transit using TLS, VPN tunnels, and secure file transfer protocols.
+    points_of_focus:
+      - "Data transmitted over public or untrusted networks is encrypted using TLS 1.2 or higher."
+      - "VPN tunnels are used for secure remote access and site-to-site connectivity."
+      - "Secure file transfer mechanisms such as SFTP or encrypted email are used for exchanging sensitive data."
+      - "Certificate management processes ensure timely renewal and proper validation of TLS certificates."
+    evidence_expectations:
+      - "TLS configuration reports or SSL scan results showing protocol versions and cipher suites in use."
+      - "VPN configuration documentation or connection logs demonstrating encrypted remote access."
+      - "Secure file transfer policy or configuration evidence for data exchange mechanisms."
+    scoring_guidance:
+      fully_met: "Evidence demonstrates comprehensive data transmission protection with TLS 1.2+ on all external interfaces, VPN for remote access, secure file transfer for sensitive data, and active certificate management."
+      partially_met: "Encryption in transit is partially implemented but gaps exist, such as legacy protocols still in use, some interfaces not using TLS, or certificate management is informal."
+      not_met: "Data is transmitted in plaintext over untrusted networks, no VPN is in place for remote access, and no secure file transfer mechanisms are used."
+      not_applicable: "The system does not transmit data over networks or all data transmission is handled by a managed service outside the entity's scope."
+
+  - id: "CC6.8"
+    category: "Logical and Physical Access Controls"
+    title: "Malware Prevention"
+    description: >
+      The entity implements controls to prevent or detect and act upon the
+      introduction of unauthorized or malicious software to meet the entity's
+      objectives. This includes antivirus and anti-malware solutions, endpoint
+      detection and response tools, and email and web filtering.
+    points_of_focus:
+      - "Antivirus or anti-malware software is deployed on endpoints and servers with automatic signature updates."
+      - "Endpoint detection and response tools provide real-time monitoring and threat containment capabilities."
+      - "Email filtering and web proxy solutions block known malicious content and phishing attempts."
+      - "Regular malware scans are scheduled and scan results are reviewed for identified threats."
+      - "Policies restrict the installation of unauthorized software on managed endpoints."
+    evidence_expectations:
+      - "Antivirus or EDR deployment reports showing coverage across endpoints and servers."
+      - "Malware scan results or dashboard screenshots demonstrating detection and remediation activity."
+      - "Email filtering and web proxy configuration evidence showing active threat blocking."
+      - "Software installation policy documentation and enforcement mechanism evidence."
+    scoring_guidance:
+      fully_met: "Evidence demonstrates comprehensive malware prevention with antivirus or EDR deployed across all endpoints and servers, automatic updates enabled, email and web filtering active, and regular scan reviews."
+      partially_met: "Malware prevention controls exist but coverage is incomplete, such as some endpoints missing antivirus, outdated signatures, or no email filtering."
+      not_met: "No antivirus, anti-malware, or endpoint protection solutions are deployed, and no controls exist to prevent or detect malicious software."
+      not_applicable: "The entity's systems consist entirely of managed services or containers where endpoint malware protection is not applicable."

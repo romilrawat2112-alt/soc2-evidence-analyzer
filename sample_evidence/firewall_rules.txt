@@ -1,0 +1,82 @@
+SECURITY GROUP AND FIREWALL RULE EXPORT
+========================================
+Export Date: 2025-06-01T10:00:00Z
+Account: prod-account-123456789012
+Region: us-east-1
+
+--- Security Group: sg-prod-web-tier (Web Application Servers) ---
+
+Inbound Rules:
+  Rule 1: ALLOW  TCP  443   0.0.0.0/0         HTTPS from internet (via ALB)
+  Rule 2: ALLOW  TCP  80    0.0.0.0/0         HTTP redirect to HTTPS (via ALB)
+  Rule 3: ALLOW  TCP  8080  10.0.0.0/16       Health check from internal LB
+  Rule 4: ALLOW  TCP  22    10.0.1.0/24       SSH from bastion subnet only
+
+Outbound Rules:
+  Rule 1: ALLOW  TCP  443   0.0.0.0/0         HTTPS to external APIs
+  Rule 2: ALLOW  TCP  5432  10.0.2.0/24       PostgreSQL to database subnet
+  Rule 3: ALLOW  TCP  6379  10.0.2.0/24       Redis to cache subnet
+  Rule 4: ALLOW  TCP  443   10.0.3.0/24       Internal service mesh
+
+--- Security Group: sg-prod-db-tier (Database Servers) ---
+
+Inbound Rules:
+  Rule 1: ALLOW  TCP  5432  10.0.1.0/24       PostgreSQL from app subnet
+  Rule 2: ALLOW  TCP  5432  10.0.4.0/24       PostgreSQL from analytics subnet
+  Rule 3: ALLOW  TCP  22    10.0.1.5/32       SSH from bastion host only
+
+Outbound Rules:
+  Rule 1: ALLOW  TCP  443   0.0.0.0/0         HTTPS for package updates
+  Rule 2: ALLOW  TCP  5432  10.0.2.10/32      Replication to standby DB
+
+--- Security Group: sg-prod-bastion (Bastion/Jump Host) ---
+
+Inbound Rules:
+  Rule 1: ALLOW  TCP  22    203.0.113.0/24    SSH from office IP range
+  Rule 2: ALLOW  TCP  22    198.51.100.0/24   SSH from VPN IP range
+  Rule 3: ALLOW  TCP  22    0.0.0.0/0         SSH from anywhere - FINDING: OVERLY PERMISSIVE
+
+Outbound Rules:
+  Rule 1: ALLOW  TCP  22    10.0.0.0/16       SSH to internal subnets
+  Rule 2: ALLOW  TCP  443   0.0.0.0/0         HTTPS for updates
+
+--- Security Group: sg-dev-environment (Development Servers) ---
+
+Inbound Rules:
+  Rule 1: ALLOW  TCP  22    0.0.0.0/0         SSH from anywhere - FINDING: OVERLY PERMISSIVE
+  Rule 2: ALLOW  TCP  3000  0.0.0.0/0         Dev server exposed - FINDING: SHOULD BE INTERNAL
+  Rule 3: ALLOW  TCP  5432  0.0.0.0/0         DB port open to internet - FINDING: CRITICAL RISK
+  Rule 4: ALLOW  TCP  443   10.0.0.0/16       HTTPS internal
+
+Outbound Rules:
+  Rule 1: ALLOW  ALL  ALL   0.0.0.0/0         All outbound traffic allowed
+
+--- Network ACL: nacl-prod-public ---
+
+Inbound Rules:
+  Rule 100: ALLOW  TCP  443   0.0.0.0/0       HTTPS
+  Rule 110: ALLOW  TCP  80    0.0.0.0/0       HTTP
+  Rule 120: ALLOW  TCP  1024-65535  0.0.0.0/0 Ephemeral ports for responses
+  Rule *:   DENY   ALL  ALL   0.0.0.0/0       Default deny
+
+Outbound Rules:
+  Rule 100: ALLOW  TCP  443   0.0.0.0/0       HTTPS
+  Rule 110: ALLOW  TCP  80    0.0.0.0/0       HTTP
+  Rule 120: ALLOW  TCP  1024-65535  0.0.0.0/0 Ephemeral ports
+  Rule *:   DENY   ALL  ALL   0.0.0.0/0       Default deny
+
+--- WAF Rules (AWS WAF v2) ---
+
+Web ACL: prod-web-acl
+  Rule 1: AWS-AWSManagedRulesCommonRuleSet       (Block common exploits)
+  Rule 2: AWS-AWSManagedRulesSQLiRuleSet          (Block SQL injection)
+  Rule 3: AWS-AWSManagedRulesKnownBadInputsRuleSet (Block known bad inputs)
+  Rule 4: RateLimit-1000-per-5min                  (Rate limiting per IP)
+  Rule 5: GeoBlock-sanctioned-countries             (Block sanctioned regions)
+
+--- VPN Configuration ---
+VPN Type: AWS Site-to-Site VPN
+Tunnel 1: AES-256-GCM, SHA-384, DH Group 20
+Tunnel 2: AES-256-GCM, SHA-384, DH Group 20 (redundant)
+IKE Version: IKEv2
+Perfect Forward Secrecy: Enabled

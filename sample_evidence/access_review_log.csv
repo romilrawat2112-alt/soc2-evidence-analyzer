@@ -1,0 +1,21 @@
+user_id,full_name,department,role,last_access_date,review_status,reviewer,review_date,action_taken,notes
+USR001,Alice Chen,Engineering,Developer,2025-05-28,Approved,Mike Torres,2025-06-01,No Change,Active contributor to production deployments
+USR002,Bob Williams,Engineering,DevOps Engineer,2025-05-30,Approved,Mike Torres,2025-06-01,No Change,On-call rotation member
+USR003,Carol Johnson,Data Science,Data Analyst,2025-05-25,Approved,Sarah Kim,2025-06-02,No Change,Regular data pipeline user
+USR004,David Brown,Marketing,Marketing Manager,2025-02-10,Revoked,Sarah Kim,2025-06-02,Access Removed,No access in 90+ days - marketing moved to SaaS platform
+USR005,Eve Martinez,Engineering,Senior Developer,2025-05-29,Approved,Mike Torres,2025-06-01,No Change,Team lead for backend services
+USR006,Frank Lee,Finance,Financial Analyst,2025-04-15,Approved,Sarah Kim,2025-06-02,Reduced Access,Read-only access retained for reporting
+USR007,Grace Taylor,HR,HR Manager,2024-11-20,Revoked,Sarah Kim,2025-06-02,Access Removed,Transferred to different business unit
+USR008,Henry Davis,Engineering,QA Engineer,2025-05-27,Approved,Mike Torres,2025-06-01,No Change,Active test environment user
+USR009,Iris Wilson,Operations,Cloud Administrator,2025-05-30,Approved,Mike Torres,2025-06-01,No Change,Primary cloud infrastructure admin
+USR010,Jack Moore,Engineering,Intern,2025-03-01,Revoked,Mike Torres,2025-06-01,Access Removed,Internship ended March 2025
+USR011,Karen White,Legal,Legal Counsel,2025-05-20,Approved,Sarah Kim,2025-06-02,No Change,Compliance document access only
+USR012,Leo Harris,Engineering,Developer,2025-05-28,Approved,Mike Torres,2025-06-01,No Change,Frontend team member
+USR013,Maria Clark,Sales,Account Executive,2024-12-05,Pending,UNASSIGNED,,,Reviewer not yet assigned - FINDING: stale pending review
+USR014,Noah Lewis,Engineering,Site Reliability Engineer,2025-05-30,Approved,Mike Torres,2025-06-01,No Change,SRE on-call rotation
+USR015,Olivia Robinson,Product,Product Manager,2025-05-22,Approved,Sarah Kim,2025-06-02,Reduced Access,Removed staging environment access
+USR016,Peter Walker,Contractor,Security Consultant,2025-04-30,Approved,Mike Torres,2025-06-01,No Change,Active engagement through Q3 2025
+USR017,Quinn Hall,Engineering,Database Administrator,2025-05-29,Approved,Mike Torres,2025-06-01,No Change,Production database access required
+USR018,Rachel Young,Contractor,DevOps Contractor,2025-01-15,Pending,UNASSIGNED,,,Contract ended Feb 2025 - FINDING: access not revoked
+USR019,Sam King,Engineering,Developer,2025-05-26,Approved,Mike Torres,2025-06-01,No Change,Mobile team developer
+USR020,Tina Wright,IT,IT Support,2025-05-28,Approved,Sarah Kim,2025-06-02,No Change,Help desk and endpoint management

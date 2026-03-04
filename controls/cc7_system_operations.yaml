@@ -1,0 +1,123 @@
+controls:
+  - id: "CC7.1"
+    category: "System Operations"
+    title: "Vulnerability Management"
+    description: >
+      The entity uses detection and monitoring procedures to identify changes to
+      configurations that result in the introduction of new vulnerabilities, and
+      susceptibilities to newly discovered vulnerabilities. This includes regular
+      vulnerability scanning, patch management, and timely remediation of
+      identified weaknesses.
+    points_of_focus:
+      - "Automated vulnerability scanning is performed on a regular schedule against infrastructure, applications, and container images."
+      - "A patch management process ensures that security patches are evaluated, tested, and applied within defined timelines."
+      - "Identified vulnerabilities are tracked through a remediation workflow with assigned owners and target resolution dates."
+      - "Critical and high-severity vulnerabilities are prioritized for expedited remediation."
+      - "Third-party and open-source dependency vulnerabilities are monitored using software composition analysis tools."
+    evidence_expectations:
+      - "Vulnerability scan reports showing scope, findings, severity ratings, and scan frequency."
+      - "Patch management policy and evidence of patch deployment records with timelines."
+      - "Vulnerability remediation tracking records such as tickets or dashboards showing resolution status and SLAs."
+      - "Software composition analysis reports for third-party dependency vulnerabilities."
+    scoring_guidance:
+      fully_met: "Evidence demonstrates a mature vulnerability management program with regular automated scanning, defined patch timelines, tracked remediation with SLAs, and third-party dependency monitoring."
+      partially_met: "Vulnerability scanning is performed but infrequently, patching occurs but without defined timelines, or remediation tracking is informal with no SLAs."
+      not_met: "No vulnerability scanning is performed, patching is ad hoc with no process, and vulnerabilities are not tracked or remediated systematically."
+      not_applicable: "The entity's systems are fully managed by a third party responsible for all vulnerability management and patching."
+
+  - id: "CC7.2"
+    category: "System Operations"
+    title: "Anomaly Detection and Monitoring"
+    description: >
+      The entity monitors system components and the operation of those components
+      for anomalies that are indicative of malicious acts, natural disasters, and
+      errors affecting the entity's ability to meet its objectives. This includes
+      SIEM deployment, centralized logging, and automated alerting on security
+      events.
+    points_of_focus:
+      - "A SIEM or centralized log management platform aggregates and correlates security events from across the environment."
+      - "Security-relevant logs from systems, applications, and network devices are collected, retained, and protected from tampering."
+      - "Automated alerting rules are configured to detect anomalous activity such as brute-force attempts, privilege escalation, and data exfiltration indicators."
+      - "Monitoring dashboards provide operational visibility into system health and security posture."
+    evidence_expectations:
+      - "SIEM or log management platform configuration and dashboard screenshots showing event aggregation and correlation."
+      - "Log retention policy and evidence of log sources being ingested from critical systems."
+      - "Alert rule definitions and sample alert notifications demonstrating detection capabilities."
+      - "Incident or event triage records showing how detected anomalies are investigated."
+    scoring_guidance:
+      fully_met: "Evidence demonstrates comprehensive monitoring with a SIEM or centralized logging platform, broad log source coverage, well-defined alert rules, and documented triage processes for detected anomalies."
+      partially_met: "Monitoring exists but has gaps such as limited log source coverage, few alert rules, no SIEM correlation, or inconsistent triage of detected events."
+      not_met: "No centralized monitoring or logging is in place, no alerting is configured, and anomalous activity would not be detected."
+      not_applicable: "All monitoring and logging is provided by a managed security service provider and is outside the entity's operational scope."
+
+  - id: "CC7.3"
+    category: "System Operations"
+    title: "Security Incident Response"
+    description: >
+      The entity evaluates events to determine whether they constitute security
+      incidents and, if so, responds to them in accordance with defined incident
+      response procedures. This includes incident classification, escalation,
+      communication, and post-incident review.
+    points_of_focus:
+      - "A documented incident response plan defines roles, responsibilities, classification criteria, and escalation procedures."
+      - "Incident response procedures include containment, eradication, and recovery steps for different incident types."
+      - "Communication protocols define internal and external notification requirements including regulatory and customer notifications."
+      - "Post-incident reviews are conducted to identify root causes and improve controls."
+      - "Incident response exercises or tabletop simulations are performed periodically to test preparedness."
+    evidence_expectations:
+      - "Incident response plan documentation with classification criteria, roles, escalation paths, and communication protocols."
+      - "Incident response records or tickets demonstrating execution of the plan during actual or simulated incidents."
+      - "Post-incident review reports with root cause analysis and remediation actions."
+    scoring_guidance:
+      fully_met: "Evidence demonstrates a documented, tested incident response plan with clear roles, classification criteria, escalation procedures, communication protocols, and post-incident reviews conducted for actual incidents."
+      partially_met: "An incident response plan exists but is outdated, has not been tested, lacks clear escalation paths, or post-incident reviews are not consistently performed."
+      not_met: "No incident response plan exists, incidents are handled ad hoc without defined procedures, and no post-incident reviews are conducted."
+      not_applicable: "Incident response is fully managed by a third-party provider under a contractual arrangement and is outside the entity's direct scope."
+
+  - id: "CC7.4"
+    category: "System Operations"
+    title: "Business Continuity"
+    description: >
+      The entity implements business continuity and disaster recovery plans to
+      ensure continued availability of critical systems and data in the event
+      of a disruption. This includes backup strategies, failover mechanisms,
+      and recovery time and recovery point objectives.
+    points_of_focus:
+      - "A business continuity plan identifies critical business processes, systems, and their recovery priorities."
+      - "Disaster recovery procedures define failover mechanisms, recovery time objectives, and recovery point objectives for critical systems."
+      - "Backup strategies ensure that data is regularly backed up to geographically separate locations."
+      - "Business continuity and disaster recovery plans are tested at least annually through exercises or simulations."
+      - "Dependencies on third-party services are identified and included in continuity planning."
+    evidence_expectations:
+      - "Business continuity plan documentation with identified critical processes, RTO/RPO targets, and recovery procedures."
+      - "Disaster recovery test reports showing test scenarios, results, and any identified gaps."
+      - "Backup configuration evidence showing backup schedules, retention periods, and offsite storage locations."
+      - "Failover architecture documentation or evidence of redundant infrastructure."
+    scoring_guidance:
+      fully_met: "Evidence demonstrates comprehensive business continuity and disaster recovery planning with defined RTO/RPOs, documented procedures, regular backups to offsite locations, failover capabilities, and annual testing."
+      partially_met: "Business continuity plans exist but RTO/RPOs are not defined for all critical systems, DR testing is infrequent or incomplete, or backup strategies have gaps."
+      not_met: "No business continuity or disaster recovery plans exist, backups are not performed or tested, and no failover mechanisms are in place."
+      not_applicable: "The entity's services are non-critical and have no availability requirements, or all continuity responsibilities are contractually delegated to a third party."
+
+  - id: "CC7.5"
+    category: "System Operations"
+    title: "Recovery and Restoration"
+    description: >
+      The entity identifies, develops, and implements activities to recover from
+      identified security incidents and restore systems and data to normal
+      operations. This includes backup testing, recovery procedure execution,
+      and validation of restored data integrity.
+    points_of_focus:
+      - "Backup restoration procedures are documented and tested periodically to verify that data can be recovered successfully."
+      - "Recovery procedures include validation of data integrity and completeness after restoration."
+      - "Recovery activities are coordinated with incident response to ensure containment before restoration begins."
+      - "Lessons learned from recovery activities are incorporated into updated recovery procedures."
+    evidence_expectations:
+      - "Backup restoration test records showing successful recovery of data and systems within defined RTO/RPO targets."
+      - "Recovery procedure documentation describing step-by-step restoration processes."
+      - "Data integrity validation records confirming completeness and accuracy of restored data."
+    scoring_guidance:
+      fully_met: "Evidence demonstrates regularly tested backup restoration with validated data integrity, documented recovery procedures, successful recovery within RTO/RPO targets, and lessons learned incorporated into procedures."
+      partially_met: "Backup restoration testing is performed but infrequently, data integrity validation is not always performed, or recovery procedures are incomplete."
+      not_met: "Backup restoration has never been tested, no recovery procedures are documented, and there is no evidence that data can be recovered if needed."
+      not_applicable: "The entity does not manage its own data storage or backup infrastructure, and all recovery responsibilities reside with a third-party provider."

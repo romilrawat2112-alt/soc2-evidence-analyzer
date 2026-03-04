@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "soc2-evidence-analyzer"
+version = "0.1.0"
+description = "AI-powered SOC 2 evidence analysis using Gemini - assess control effectiveness from raw evidence in seconds."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [
+    { name = "Romil Rawat" },
+]
+dependencies = [
+    "google-genai>=1.0.0",
+    "typer[all]>=0.9.0",
+    "pymupdf>=1.24.0",
+    "pillow>=10.0.0",
+    "pyyaml>=6.0",
+    "pydantic>=2.0",
+    "rich>=13.0.0",
+    "jinja2>=3.1.0",
+]
+
+[project.scripts]
+soc2-analyzer = "soc2_analyzer.cli:app"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/soc2_analyzer"]
