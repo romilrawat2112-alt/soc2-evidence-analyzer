@@ -9,6 +9,20 @@ AI-powered SOC 2 evidence analysis using Gemini — assess control effectiveness
 
 SOC 2 audits require evaluating hundreds of evidence artifacts against Trust Services Criteria. This is slow, inconsistent, and subjective. This tool uses **Gemini Flash 2.5** as an AI auditor to ingest evidence files, map them to controls, assess compliance, identify gaps, and produce structured reports — in seconds instead of hours.
 
+## What This Demonstrates
+
+A working prototype of the assurance pattern I build at enterprise scale: control definitions held as
+structured data, evidence assessed against them automatically, and every judgment returned with a
+confidence score and named gaps, so a reviewer can check the machine's work instead of trusting it.
+
+- **Controls as data, not prose.** 14 Trust Services Criteria controls defined in YAML with explicit
+  points of focus, evidence expectations and a scoring rubric, so the same control is tested the same
+  way every cycle.
+- **Structured, auditable output.** JSON schema enforcement and typed Pydantic models, so results are
+  machine-checkable and diffable rather than free text.
+- **Evidence quality scored separately from compliance.** A control can be assessed as met on weak
+  evidence, and the report says so rather than hiding it.
+
 ## Quick Demo
 
 ```bash
@@ -39,7 +53,7 @@ graph LR
 ## Installation
 
 ```bash
-git clone https://github.com/yourusername/soc2-evidence-analyzer.git
+git clone https://github.com/romilrawat2112-alt/soc2-evidence-analyzer.git
 cd soc2-evidence-analyzer
 pip install -e .
 ```
