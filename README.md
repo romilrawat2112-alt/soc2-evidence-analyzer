@@ -20,6 +20,12 @@ confidence score and named gaps, so a reviewer can check the machine's work inst
   way every cycle.
 - **Structured, auditable output.** JSON schema enforcement and typed Pydantic models, so results are
   machine-checkable and diffable rather than free text.
+- **Model-agnostic by design.** The control definitions, prompt construction, scoring rubric and typed
+  output parsing are provider-independent; the model call itself is isolated in a single client module
+  (`gemini_client.py`). Porting to Claude, Codex or another provider means implementing that one
+  interface, not reworking the pipeline. Gemini is what it ships against today, and the image path
+  currently uses Gemini's multimodal API, so that is the one piece a port would need to replace.
+
 - **Evidence quality scored separately from compliance.** A control can be assessed as met on weak
   evidence, and the report says so rather than hiding it.
 
